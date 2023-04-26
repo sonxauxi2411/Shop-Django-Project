@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Create Product{% endblock title %}
+{% block block_body %}
+    <h1>Create Products </h1>
+    <form method='POST' class='d-flex flex-column w-25 gap-2'>
+        {% csrf_token %}
+       <label>Title </label>
+       {{form.title}}
+       <label>Picture(url)</label>
+       {{form.picture}}
+       <label>Price</label>
+       {{form.price}}
+       <label>Count</label>
+       {{form.count}}
+       <label>Description</label>
+       {{form.desc}}
+       <a  class='btn btn-primary'>Add Product</a>
+    </from>
+{% endblock block_body %}

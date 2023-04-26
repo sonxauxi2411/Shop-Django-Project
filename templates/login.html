@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Loign{% endblock title %}
+{% block block_body %}
+    <h1>Login</h1>
+    <form method='POST' class='d-flex flex-column w-25 gap-2'>
+        {% csrf_token %}
+        <label>Username</label>
+        <input type="text" name="username" />
+        <label>Password</label>
+        <input type="password" name="password" />
+        <button type='submit' class='btn btn-primary'>
+            Login
+        </button>
+    </form>
+{% endblock block_body %}
