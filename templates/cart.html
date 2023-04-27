@@ -1,15 +1,64 @@
 {% extends 'base.html' %}
 {% block title %}Cart{% endblock title %}
+{% load static %}
+
 
 {% block block_body %}
-<h1> CART </h1>
-{% if cart  %}
-  {%for item in cart%}
-    {{item.title}}
-  {% endfor %}
+
+<div class='container'>
+  
+    <div class='row'>
+      <div class='col'>
+        <div class='border-bottom py-3'>
+          <h1>Shopping Cart</h1>
+        </div>
+        
+        <div >
+            {%if cart %}
+              {% for item in cart%}
+                <div class='d-flex justify-content-between gap-4 align-items-center border-bottom py-2'>
+                  <img src={{item.picture}} alt='a' width='70px' />
+                  <span style='width:100px'>{{item.title}} </span>
+                  <div>
+                     {% csrf_token %} 
+                    <button class='btn btn-minus' data-product-id={{item.product_id}} data-product-price={{item.price}}><i class="bi bi-dash"></i></button>
+                    <span class='quantity' >{{item.quantity}}</span>
+                    <button class='btn btn-add' data-product-id={{item.product_id}} data-product-price={{item.price}}><i class="bi bi-plus"></i></button>
+                  </div>
+                  <span>
+                    <span class='total' >{{item.total}} </span>
+                    $
+                  </span>
+                  
+                  <button class='btn delete' data-product-id={{item.product_id}}>X</button> 
+                </div>
+               
+              {% endfor %}
+              <div class='pt-2'>
+                <span>Total price :</span>
+                <span class='total-all'></span>
+              </div>
+              
+              <div class='d-flex justify-content-between'>
+                <a href="{% url 'shop' %}">Go To Shop</a>
+                <button class='btn btn-primary'>Checkout </button>
+              </div>
+              {%else%}
+              <h1>Not Cart</h1>
+            {% endif %}
+            
+        </div>
+      </div>
+      <div class='col'>
        
-    
-{% else %}
-    <h4>No Cart </h4>
-{% endif %}
+        
+      </div>
+
+
+    </div>
+  
+
+ </div>
+
+
 {% endblock block_body %}

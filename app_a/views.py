@@ -96,6 +96,7 @@ def carts(request):
         'total': cart.total,
         'title': cart.product.title,
         'price': cart.product.price,
+        'picture' : cart.product.picture
         }
         for cart in carts
         ]
@@ -105,3 +106,16 @@ def carts(request):
     else :
         return redirect('login')
    
+
+def updateCart (request ,id, qty,total):
+    
+    cart  = CartItem.objects.get(user_id=request.user.id, product_id = id)
+    cart.quantity = qty
+    cart.total = total
+    cart.save()
+    return redirect('shop')
+
+def deleteCart (request, id):
+    CartItem.objects.get(user_id=request.user.id, product_id=id).delete()
+    
+    return redirect('shop')
